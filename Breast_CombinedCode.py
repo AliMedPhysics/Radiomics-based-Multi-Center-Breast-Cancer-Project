@@ -7,60 +7,60 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 
 #Load data
-dataset_Mal_Mohammadi = np.loadtxt(open('/My Drive/Breast 1/Data/Robust_Radiomics_Malaysia_Mohammadi.csv', "rb"), delimiter=",")
+dataset_Mal_M = np.loadtxt(open('/My Drive/Breast 1/Data/Robust_Radiomics_Malaysia_M.csv', "rb"), delimiter=",")
 
-dataset_Irn_Mohammadi = np.loadtxt(open('/My Drive/Breast 1/Data/Robust_Radiomics_Iran_Mohammadi.csv', "rb"), delimiter=",")
+dataset_Irn_M = np.loadtxt(open('/My Drive/Breast 1/Data/Robust_Radiomics_Iran_M.csv', "rb"), delimiter=",")
 
 dataset_Turkish = np.loadtxt(open('/My Drive/Breast 1/Data/Robust_Radiomics_Turkish_Taha.csv', "rb"), delimiter=",")
 
-dataset_Mal_Mohammadi = np.random.permutation(dataset_Mal_Mohammadi)
-dataset_Mal_Mohammadi = np.random.permutation(dataset_Mal_Mohammadi)
+dataset_Mal_M = np.random.permutation(dataset_Mal_M)
+dataset_Mal_M = np.random.permutation(dataset_Mal_M)
 
-dataset_Irn_Mohammadi = np.random.permutation(dataset_Irn_Mohammadi)
-dataset_Irn_Mohammadi = np.random.permutation(dataset_Irn_Mohammadi)
+dataset_Irn_M = np.random.permutation(dataset_Irn_M)
+dataset_Irn_M = np.random.permutation(dataset_Irn_M)
 
 dataset_Turkish = np.random.permutation(dataset_Turkish)
 dataset_Turkish = np.random.permutation(dataset_Turkish)
 
-X_Mal_Mohammadi = dataset_Mal_Mohammadi[:,1:]
-y_Mal_Mohammadi = dataset_Mal_Mohammadi[:,0]
+X_Mal_M = dataset_Mal_M[:,1:]
+y_Mal_M = dataset_Mal_M[:,0]
 
-X_Ir_Mohammadi = dataset_Irn_Mohammadi[:,1:]
-y_Ir_Mohammadi = dataset_Irn_Mohammadi[:,0]
+X_Ir_M = dataset_Irn_M[:,1:]
+y_Ir_M = dataset_Irn_M[:,0]
 
 X_Turkish = dataset_Turkish[:,1:]
 y_Turkish = dataset_Turkish[:,0]
 
-#np.save('/My Drive/Breast 1/Data/X_Ir_Mohammadi.npy',X_Ir_Mohammadi)
-#np.save('/My Drive/Breast 1/Data/y_Ir_Mohammadi.npy',y_Ir_Mohammadi)
+#np.save('/My Drive/Breast 1/Data/X_Ir_M.npy',X_Ir_M)
+#np.save('/My Drive/Breast 1/Data/y_Ir_M.npy',y_Ir_M)
 
-#np.save('/My Drive/Breast 1/Data/X_Mal_Mohammadi.npy',X_Mal_Mohammadi)
-#np.save('/My Drive/Breast 1/Data/y_Mal_Mohammadi.npy',y_Mal_Mohammadi)
+#np.save('/My Drive/Breast 1/Data/X_Mal_M.npy',X_Mal_M)
+#np.save('/My Drive/Breast 1/Data/y_Mal_M.npy',y_Mal_M)
 
 #np.save('/My Drive/Breast 1/Data/X_Turkish.npy',X_Turkish)
 #np.save('/My Drive/Breast 1/Data/y_Turkish.npy',y_Turkish)
 
-X_Mal_Mohammadi = np.load('/gdrive/My Drive/Breast 1/Data/X_Mal_Mohammadi.npy')
-y_Mal_Mohammadi = np.load('/gdrive/My Drive/Breast 1/Data/y_Mal_Mohammadi.npy')
+X_Mal_M = np.load('/gdrive/My Drive/Breast 1/Data/X_Mal_M.npy')
+y_Mal_M = np.load('/gdrive/My Drive/Breast 1/Data/y_Mal_M.npy')
 
 X_Turkish = np.load('/gdrive/My Drive/Breast 1/Data/X_Turkish.npy')
 y_Turkish = np.load('/gdrive/My Drive/Breast 1/Data/y_Turkish.npy')
 
-X_Ir_Mohammadi = np.load('/gdrive/My Drive/Breast 1/Data/X_Ir_Mohammadi.npy')
-y_Ir_Mohammadi = np.load('/gdrive/My Drive/Breast 1/Data/y_Ir_Mohammadi.npy')
+X_Ir_M = np.load('/gdrive/My Drive/Breast 1/Data/X_Ir_M.npy')
+y_Ir_M = np.load('/gdrive/My Drive/Breast 1/Data/y_Ir_M.npy')
 
 min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
 
-min_max_scaler.fit(X_Mal_Mohammadi)
-X_Mal_Mohammadi = min_max_scaler.transform(X_Mal_Mohammadi)
+min_max_scaler.fit(X_Mal_M)
+X_Mal_M = min_max_scaler.transform(X_Mal_M)
 
-min_max_scaler.fit(X_Ir_Mohammadi)
-X_Ir_Mohammadi = min_max_scaler.transform(X_Ir_Mohammadi)
+min_max_scaler.fit(X_Ir_M)
+X_Ir_M = min_max_scaler.transform(X_Ir_M)
 
 min_max_scaler.fit(X_Turkish)
 X_Turkish = min_max_scaler.transform(X_Turkish)
 
-X_Train, X_Test_Malaysia, y_Train, y_Test_Malaysia = train_test_split(X_Mal_Mohammadi, y_Mal_Mohammadi, test_size=0.85, shuffle=True, stratify=y_Mal_Mohammadi)
+X_Train, X_Test_Malaysia, y_Train, y_Test_Malaysia = train_test_split(X_Mal_M, y_Mal_M, test_size=0.85, shuffle=True, stratify=y_Mal_M)
 X_Train, X_Val_Malaysia, y_Train, y_Val_Malaysia = train_test_split(X_Train, y_Train, test_size=0.15, shuffle=True, stratify=y_Train)
 
 X_Train_Testing = X_Train
@@ -69,8 +69,8 @@ y_Train_Testing = y_Train
 X_Test_Turkish = X_Turkish
 y_Test_Turkish = y_Turkish
 
-X_Test_Iran = X_Ir_Mohammadi
-y_Test_Iran = y_Ir_Mohammadi
+X_Test_Iran = X_Ir_M
+y_Test_Iran = y_Ir_M
 
 np.savetxt("/My Drive/Breast 1/ResultData/y_Train_Testing.csv", y_Train_Testing, delimiter=",")
 np.savetxt("/My Drive/Breast 1/ResultData/y_Test_Malaysia.csv", y_Test_Malaysia, delimiter=",")
